@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bipesh Dhakal — Cybersecurity Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0e0e0e;
+    --surface: #161616;
+    --surface2: #1e1e1e;
+    --gold: #f5a623;
+    --gold-light: #ffc95c;
+    --gold-dim: rgba(245,166,35,0.1);
+    --gold-border: rgba(245,166,35,0.35);
+    --text: #f0ede8;
+    --muted: #888076;
+    --sans: 'Plus Jakarta Sans', sans-serif;
+    --serif: 'Playfair Display', serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 5rem;
+    background: rgba(14,14,14,0.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(245,166,35,0.1);
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+
+  .nav-links a {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: color 0.2s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0; right: 0;
+    height: 1.5px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transition: transform 0.22s;
+    transform-origin: left;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; }
+  section { padding: 7rem 0; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #hero::before {
+    content: '';
+    position: absolute;
+    top: -150px; right: -150px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(245,166,35,0.07) 0%, transparent 68%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 1.1rem;
+    border: 1px solid var(--gold-border);
+    border-radius: 100px;
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    background: var(--gold-dim);
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    animation: pulse 2s ease infinite;
+  }
+
+  @keyframes pulse {
+    0%,100% { opacity:1; transform:scale(1); }
+    50% { opacity:0.4; transform:scale(0.7); }
+  }
+
+  .hero-name {
+    font-family: var(--serif);
+    font-size: clamp(3.5rem, 8vw, 6.5rem);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+  }
+
+  .hero-title {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 500;
+    color: var(--gold);
+    margin-bottom: 1.75rem;
+    min-height: 2.6rem;
+    letter-spacing: 0.01em;
+  }
+
+  .cursor {
+    display: inline-block;
+    width: 2px; height: 1em;
+    background: var(--gold);
+    animation: blink 1s step-end infinite;
+    vertical-align: middle;
+    margin-left: 2px;
+  }
+
+  @keyframes blink { 50% { opacity:0; } }
+
+  .hero-desc {
+    max-width: 500px;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.82;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 4rem; }
+
+  .btn {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    padding: 0.9rem 2rem;
+    border-radius: 8px;
+    transition: all 0.22s;
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+    font-family: var(--sans);
+  }
+
+  .btn-primary { background: var(--gold); color: #0e0e0e; }
+  .btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(245,166,35,0.28);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid rgba(240,237,232,0.18);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--gold-border);
+    color: var(--gold);
+    transform: translateY(-2px);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 3.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(245,166,35,0.12);
+    flex-wrap: wrap;
+  }
+
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 2.3rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.73rem;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+  }
+
+  .divider { height: 1px; background: rgba(245,166,35,0.08); margin: 0 2.5rem; }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 0.9rem;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 28px; height: 2px;
+    background: var(--gold);
+    border-radius: 2px;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 3.5rem;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .about-text p {
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+    line-height: 1.85;
+    font-size: 0.95rem;
+  }
+
+  .about-text strong { color: var(--text); font-weight: 600; }
+
+  .avatar-frame {
+    width: 100%;
+    aspect-ratio: 4/5;
+    background: var(--surface);
+    border: 2px solid var(--gold-border);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .avatar-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(245,166,35,0.06) 0%, transparent 60%);
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid rgba(245,166,35,0.18);
+    border-radius: 14px;
+    padding: 1.75rem;
+    transition: border-color 0.22s, transform 0.22s, box-shadow 0.22s;
+  }
+
+  .skill-card:hover {
+    border-color: var(--gold-border);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 36px rgba(245,166,35,0.1);
+  }
+
+  .skill-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: var(--gold-dim);
+    border: 1px solid var(--gold-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    margin-bottom: 1rem;
+  }
+
+  .skill-card h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.9rem;
+    color: var(--text);
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-bottom: 1.1rem;
+  }
+
+  .tag {
+    font-size: 0.72rem;
+    font-weight: 500;
+    padding: 0.3rem 0.75rem;
+    border-radius: 100px;
+    border: 1px solid rgba(245,166,35,0.22);
+    color: var(--muted);
+    background: rgba(245,166,35,0.05);
+    transition: all 0.18s;
+  }
+
+  .tag:hover {
+    border-color: var(--gold-border);
+    color: var(--gold);
+    background: var(--gold-dim);
+  }
+
+  .skill-bar-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 0.45rem;
+  }
+
+  .skill-bar {
+    height: 3px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 100px;
+    overflow: hidden;
+  }
+
+  .skill-bar-fill {
+    height: 100%;
+    border-radius: 100px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    width: 0%;
+    transition: width 1.3s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  /* EXPERIENCE */
+  .timeline { position: relative; padding-left: 1.5rem; }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 10px; bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--gold), rgba(245,166,35,0.08));
+    border-radius: 2px;
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -0.5rem;
+    top: 1.2rem;
+    width: 13px; height: 13px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    background: var(--bg);
+    transform: translateX(-50%);
+  }
+
+  .timeline-inner {
+    background: var(--surface);
+    border: 1px solid rgba(245,166,35,0.18);
+    border-radius: 14px;
+    padding: 1.5rem 1.75rem;
+    transition: border-color 0.22s, box-shadow 0.22s;
+  }
+
+  .timeline-inner:hover {
+    border-color: var(--gold-border);
+    box-shadow: 0 8px 28px rgba(245,166,35,0.08);
+  }
+
+  .timeline-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .timeline-role { font-size: 1rem; font-weight: 700; color: var(--text); }
+
+  .timeline-date {
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: var(--gold);
+    background: var(--gold-dim);
+    border: 1px solid var(--gold-border);
+    padding: 0.25rem 0.8rem;
+    border-radius: 100px;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  .timeline-company {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 0.85rem;
+  }
+
+  .timeline-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.78; }
+
+  /* CONTACT */
+  #contact { text-align: center; }
+
+  .contact-inner { max-width: 640px; margin: 0 auto; }
+
+  .contact-inner p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin: 1.25rem 0 2.5rem;
+  }
+
+  .contact-form { display: grid; gap: 1rem; text-align: left; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .form-group { display: flex; flex-direction: column; gap: 0.45rem; }
+
+  label {
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  input, textarea {
+    background: var(--surface);
+    border: 1px solid rgba(245,166,35,0.15);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    padding: 0.88rem 1rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    resize: none;
+    width: 100%;
+  }
+
+  input::placeholder, textarea::placeholder { color: var(--muted); opacity: 0.55; }
+
+  input:focus, textarea:focus {
+    border-color: var(--gold-border);
+    box-shadow: 0 0 0 3px rgba(245,166,35,0.08);
+  }
+
+  textarea { min-height: 140px; }
+
+  .form-status {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    min-height: 1.2em;
+    letter-spacing: 0.03em;
+    color: var(--gold);
+  }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 3rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(245,166,35,0.1);
+    flex-wrap: wrap;
+  }
+
+  .social-link {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    padding: 0.5rem 1.25rem;
+    border: 1px solid rgba(245,166,35,0.18);
+    border-radius: 100px;
+    transition: all 0.2s;
+  }
+
+  .social-link:hover {
+    color: var(--gold);
+    border-color: var(--gold-border);
+    background: var(--gold-dim);
+    transform: translateY(-1px);
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid rgba(245,166,35,0.08);
+    font-size: 0.78rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  footer span { color: var(--gold); }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(22px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  .animate-in { animation: fadeUp 0.6s ease both; }
+  [data-delay="1"] { animation-delay: 0.1s; }
+  [data-delay="2"] { animation-delay: 0.2s; }
+  [data-delay="3"] { animation-delay: 0.3s; }
+  [data-delay="4"] { animation-delay: 0.4s; }
+  [data-delay="5"] { animation-delay: 0.5s; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .hero-stats { gap: 2rem; }
+    .container { padding: 0 1.25rem; }
+    .divider { margin: 0 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#hero">BD.</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-badge animate-in">Available for opportunities</div>
+    <h1 class="hero-name animate-in" data-delay="1">Bipesh Dhakal</h1>
+    <div class="hero-title animate-in" data-delay="2" id="hero-title"><span class="cursor"></span></div>
+    <p class="hero-desc animate-in" data-delay="3">
+      I defend organizations from cyber threats — specializing in <strong style="color:var(--text);font-weight:700;">Security Operations</strong> and <strong style="color:var(--text);font-weight:700;">Threat Detection</strong>, with hands-on experience across industry-leading SIEM and EDR platforms.
+    </p>
+    <div class="hero-cta animate-in" data-delay="4">
+      <a href="#contact" class="btn btn-primary">Get in Touch →</a>
+      <a href="#experience" class="btn btn-outline">View My Work</a>
+    </div>
+    <div class="hero-stats animate-in" data-delay="5">
+      <div><div class="stat-num">1+</div><div class="stat-label">Year in Security</div></div>
+      <div><div class="stat-num">6+</div><div class="stat-label">Platforms Mastered</div></div>
+      <div><div class="stat-num">24/7</div><div class="stat-label">SOC Mindset</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <div class="section-label">About Me</div>
+        <h2>A bit about who I am</h2>
+        <div class="about-text">
+          <p>Hi, I'm <strong>Bipesh Dhakal</strong> — a Cybersecurity professional based in <strong>Kathmandu, Nepal</strong>, focused on defensive security and Security Operations. I thrive in high-pressure environments where fast, accurate threat detection makes all the difference.</p>
+          <p>Over the past year, I've built hands-on experience as a <strong>SOC Analyst</strong>, monitoring, triaging, and responding to security incidents across enterprise environments. I believe that strong security isn't just about tools — it's about understanding attacker behaviour and staying one step ahead.</p>
+          <p>When I'm not in the SOC, you'll find me sharpening my skills in threat hunting, exploring new attack techniques to better defend against them, or keeping up with the ever-evolving cybersecurity landscape.</p>
+        </div>
+        <div style="margin-top:2rem;">
+          <a href="#contact" class="btn btn-primary">Let's Work Together →</a>
+        </div>
+      </div>
+      <div><div class="avatar-frame">🛡️</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label">Skills</div>
+    <h2>What I work with</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">🔍</div>
+        <h3>SIEM Platforms</h3>
+        <div class="skill-tags">
+          <span class="tag">IBM QRadar</span><span class="tag">Microsoft Sentinel</span>
+          <span class="tag">Logpoint</span><span class="tag">ELK Stack</span><span class="tag">OpenSearch</span>
+        </div>
+        <div class="skill-bar-label"><span>Proficiency</span><span>85%</span></div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="85"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🛡️</div>
+        <h3>EDR & Endpoint Security</h3>
+        <div class="skill-tags">
+          <span class="tag">CrowdStrike Falcon</span><span class="tag">Microsoft Defender</span>
+          <span class="tag">Threat Hunting</span><span class="tag">Incident Response</span>
+        </div>
+        <div class="skill-bar-label"><span>Proficiency</span><span>80%</span></div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="80"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">☁️</div>
+        <h3>Cloud & Infrastructure</h3>
+        <div class="skill-tags">
+          <span class="tag">Google Cloud (GCP)</span><span class="tag">Cloud Security</span>
+          <span class="tag">Log Analysis</span><span class="tag">Network Monitoring</span>
+        </div>
+        <div class="skill-bar-label"><span>Proficiency</span><span>70%</span></div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="70"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">⚡</div>
+        <h3>SOC Operations</h3>
+        <div class="skill-tags">
+          <span class="tag">Alert Triage</span><span class="tag">Threat Intelligence</span>
+          <span class="tag">MITRE ATT&CK</span><span class="tag">Vulnerability Assessment</span>
+        </div>
+        <div class="skill-bar-label"><span>Proficiency</span><span>85%</span></div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="85"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label">Experience</div>
+    <h2>Where I've been</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-inner">
+          <div class="timeline-top">
+            <div class="timeline-role">SOC Analyst</div>
+            <div class="timeline-date">June 2025 — Present</div>
+          </div>
+          <div class="timeline-company">Defensive Security · Full-time</div>
+          <div class="timeline-desc">Working as a frontline SOC Analyst, monitoring and responding to security events across enterprise environments. Responsible for alert triage, threat investigation, and incident escalation using SIEM platforms including IBM QRadar and Microsoft Sentinel. Continuously tuning detection rules to reduce noise and improve threat signal quality.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-inner">
+          <div class="timeline-top">
+            <div class="timeline-role">System & Network Engineer</div>
+            <div class="timeline-date">May 2024 — Dec 2024</div>
+          </div>
+          <div class="timeline-company">Infrastructure & Networking · Full-time</div>
+          <div class="timeline-desc">Managed and maintained system and network infrastructure over an 8-month tenure. Gained foundational exposure to enterprise environments, network security principles, and infrastructure monitoring — experience that directly shaped a transition into cybersecurity and SOC operations.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="section-label" style="justify-content:center;">Contact</div>
+      <h2>Let's build something great</h2>
+      <p>Have a project in mind, or just want to say hello? My inbox is open — drop me a line and I'll get back to you within 24 hours.</p>
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Your Name" />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="hello@example.com" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" placeholder="What's this about?" />
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="Tell me about your project..."></textarea>
+        </div>
+        <div>
+          <button class="btn btn-primary" onclick="submitForm()" style="width:100%;">Send Message →</button>
+        </div>
+        <div class="form-status" id="form-status"></div>
+      </div>
+      <div class="social-links">
+        <a href="https://np.linkedin.com/in/bipesh-dhakal-4b6984251" target="_blank" class="social-link">LinkedIn</a>
+        <a href="mailto:Bipeshd@gmail.com" class="social-link">Email</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 <span>Bipesh Dhakal</span> — Defending the digital frontier.</footer>
+
+<script>
+  const bars = document.querySelectorAll('.skill-bar-fill');
+  const barObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.style.width = e.target.dataset.width + '%'; barObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.4 });
+  bars.forEach(b => barObs.observe(b));
+
+  const animElems = document.querySelectorAll('.skill-card, .timeline-item');
+  const scrollObs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        e.target.style.animation = `fadeUp 0.55s ease ${i * 0.09}s both`;
+        scrollObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  animElems.forEach(el => { el.style.opacity = '0'; scrollObs.observe(el); });
+
+  const roles = ['SOC Analyst', 'Defensive Security Professional', 'Threat Detection Specialist', 'Cybersecurity Analyst'];
+  const titleEl = document.getElementById('hero-title');
+  let ri = 0, ci = 0, deleting = false;
+
+  function updateTitle(text) {
+    titleEl.textContent = text;
+    const cur = document.createElement('span');
+    cur.className = 'cursor';
+    titleEl.appendChild(cur);
+  }
+
+  function typeWriter() {
+    const current = roles[ri];
+    if (!deleting) {
+      updateTitle(current.slice(0, ci + 1)); ci++;
+      if (ci === current.length) { deleting = true; setTimeout(typeWriter, 2400); return; }
+    } else {
+      updateTitle(current.slice(0, ci - 1)); ci--;
+      if (ci === 0) { deleting = false; ri = (ri + 1) % roles.length; }
+    }
+    setTimeout(typeWriter, deleting ? 45 : 85);
+  }
+
+  updateTitle(''); setTimeout(typeWriter, 700);
+
+  async function submitForm() {
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const subject = document.getElementById('subject').value.trim();
+    const message = document.getElementById('message').value.trim();
+    const status = document.getElementById('form-status');
+    if (!name || !email || !message) { status.style.color='#e05252'; status.textContent='Please fill in all required fields.'; return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { status.style.color='#e05252'; status.textContent='Please enter a valid email address.'; return; }
+    status.style.color='var(--gold)'; status.textContent='Sending your message...';
+    try {
+      const res = await fetch('https://formspree.io/f/xojyzrpn', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ name, email, subject, message })
+      });
+      if (res.ok) {
+        status.style.color='var(--gold)';
+        status.textContent='✓ Message sent! I\'ll be in touch soon.';
+        ['name','email','subject','message'].forEach(id => document.getElementById(id).value='');
+      } else {
+        status.style.color='#e05252';
+        status.textContent='Something went wrong. Please try again or email directly.';
+      }
+    } catch(e) {
+      status.style.color='#e05252';
+      status.textContent='Network error. Please check your connection and try again.';
+    }
+  }
+</script>
+</body>
+</html>
